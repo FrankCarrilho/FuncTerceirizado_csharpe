@@ -14,7 +14,7 @@ namespace Employee
             Console.Write("ENTER THE NUMBER OF EMPLOYEE: ");
             int n = int.Parse(Console.ReadLine());
 
-            for (int i = 1; n <= i; i++)
+            for (int i = 1; i <= n; i++)
             {
                 Console.Write($"EMPLOYEE #{i} DATA: ");
                 Console.Write("OUTSOURCED (y/n)? ");
@@ -27,9 +27,25 @@ namespace Employee
                 Console.Write("VALUE PER HOUR: ");
                 double valuePerHour = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-
+                if (ch == 'y')
+                {
+                    Console.Write("ADDITIONAL CHARGE: ");
+                    double add = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    list.Add(new OutSourcedEmployee(name,hour,valuePerHour,add));
+                }
+                else
+                {
+                    list.Add(new Employe(name, hour, valuePerHour));
+                }
             }
 
+            Console.WriteLine("\nPAYMENTS:");
+            foreach (Employe employee in list)
+            {
+                Console.WriteLine(employee.Name 
+                    + " - R$ " 
+                    + employee.Payment().ToString("F2"), CultureInfo.InvariantCulture);
+            }
         }
     }
 }
